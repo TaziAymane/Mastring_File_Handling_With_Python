@@ -41,9 +41,16 @@
 #        result.append(i)
 # print(result)
 # Exercice 3
+"""
 listPairs = []
 for i in range (21) :
     if (i%2 == 0):
         listPairs.append(i)
 
 print(listPairs)
+"""
+def printname(name):
+    print(f'hello {name}')
+    
+
+printname('aymane')
