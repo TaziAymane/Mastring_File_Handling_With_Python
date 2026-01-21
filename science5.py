@@ -1,3 +1,4 @@
+
 import re
 
 class LogEntry:
@@ -8,6 +9,8 @@ class LogEntry:
         r'"[^"]*" '
         r'"(?P<user_agent>[^"]+)"'
     )
+
+    RANDOM_KEY_PATTERN = re.compile(r'[A-Z]{8,}')
     def __init__(self, raw_line: str):
         self.raw_line = raw_line
         self._parse()
@@ -29,6 +32,19 @@ class LogEntry:
     @property
     def user_agent(self):
         return self._user_agent
+    
+    @property
+    def has_random_query(self):
+        if '?' not in self.url:
+            return False
+        query = self.url.split('?',1)[1]
+
+        for param in query.split('&'):
+            key = param.split('=', 1)[0]
+            if self.RANDOM_KEY_PATTERN.fullmatch(key):
+                return True
+        return False
+
         
 
 line = (
