@@ -77,7 +77,29 @@ class Admin(Compte):
 user = Compte('aymane_user')
 admin = Admin("aymane_admin")
 
-user.access()
-admin.access()
+# user.access()
+# admin.access()
 
       
+class LogSecurite:
+    def __init__(self, source):
+        self.source = source
+    def affichier(self):
+        print(f'Afficher Log Securité {self.source}')
+        
+class LogSSH(LogSecurite):
+    def __init__(self, source, ip):
+        super().__init__(source)
+        self.ip = ip
+    def affichier(self):
+        print(f'Afficher Log SSH : Source -> {self.source}  IP -> {self.ip}')
+    
+    
+print('\n')
+LogSecurite = LogSecurite("google")
+print('LogSecurite')
+LogSecurite.affichier()
+print('\n')
+LogSSH = LogSSH('Brave','198.168.0.1.1')
+print('LogSSH')
+LogSSH.affichier()
